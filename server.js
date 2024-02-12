@@ -101,5 +101,7 @@ const startApolloServer = async(app, httpServer) => {
     server.applyMiddleware({ app });
   }
   startApolloServer(app, httpServer);
-  
-  export default httpServer;
+let port = process.env.PORT || 4000
+app.listen({ port }, () =>
+    console.log(`Server ready:: `)
+);
