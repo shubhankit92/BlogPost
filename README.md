@@ -1,6 +1,6 @@
 # Backend Service
 
-This is the backend service for the [Your Project Name] project. It provides the server-side logic and API endpoints for the application.
+This is the backend service for the Blog Post Backend. It provides the server-side logic and API endpoints for the application.
 
 ## Technologies Used
 
