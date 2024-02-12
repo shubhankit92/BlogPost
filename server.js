@@ -42,6 +42,7 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         blogs: async () => {
+            console.log('Called')
             const cachedBlogs = await redis.get('blogs');
             if (cachedBlogs) {
                 return JSON.parse(cachedBlogs);
