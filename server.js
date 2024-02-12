@@ -14,7 +14,13 @@ const pool = new Pool({
     port: 5432,
 });
 
-const redis = new Redis(); // Connect to your Redis instance
+const redis = new Redis({
+    port: 17923, // Redis port
+    host: "redis-17923.c326.us-east-1-3.ec2.cloud.redislabs.com", // Redis host
+    username: "default", // needs Redis >= 6
+    password: "eVX2SMnPpMe1c58xuAfCWyNCLwZqXyRK",
+    db: 0, // Defaults to 0
+}); // Connect to your Redis instance
 
 const typeDefs = gql`
     type Blog {
