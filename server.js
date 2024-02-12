@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 const Redis = require('ioredis');
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 
 const pool = new Pool({
     user: 'hganmrhu',
