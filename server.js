@@ -2,9 +2,15 @@ const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 const { Pool } = require('pg');
 const Redis = require('ioredis');
+const { ApolloServerPluginDrainHttpServer } = require("apollo-server-core")
+const http = require("http")
+const cors = require("cors")
+
 
 const app = express();
-const port = process.env.PORT || 4000;
+app.use(cors());
+app.use(express.json());
+const httpServer = http.createServer(app);
 
 const pool = new Pool({
     user: 'hganmrhu',
@@ -84,18 +90,18 @@ const resolvers = {
     },
 };
 
-async function startServer() {
-  let apolloServer = new ApolloServer({
-    typeDefs,
-    resolvers,
-    introspection: true,
-    playground: true,
-  });
-  await apolloServer.start();
-  apolloServer.applyMiddleware({ app });
-}
-startServer();
-
+const startApolloServer = async(app, httpServer) => {
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    });
+  
+    await server.start();
+    server.applyMiddleware({ app });
+  }
+  startApolloServer(app, httpServer);
+let port = process.env.PORT || 4000
 app.listen({ port }, () =>
     console.log(`Server ready:: `)
 );
