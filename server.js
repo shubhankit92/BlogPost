@@ -88,6 +88,8 @@ async function startServer() {
   let apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,
+    playground: true,
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app });
